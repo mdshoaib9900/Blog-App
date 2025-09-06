@@ -3,14 +3,14 @@ import { Client, Account, ID } from "appwrite";
 
 
 
-export class AuthSerivce{
+export class AuthService{
     client =new Client();
     account;
 
     constructor(){
         this.client
         .setEndpoint(conf.appWriteUrl)
-        .setProject(conf.appwriteProjectId);
+        .setProject(conf.appWriteProjectId);
         this.account=new Account(this.client);
     }
 
@@ -58,7 +58,7 @@ export class AuthSerivce{
     }
 }
 
-const authService=new AuthSerivce();
+const authService=new AuthService();
 
 export default authService;
 
