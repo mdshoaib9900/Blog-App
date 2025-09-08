@@ -5,7 +5,6 @@ import {Button,Input,Logo} from './index'
 import { useDispatch } from 'react-redux'
 import authService from '../appwrite/auth'
 import {useForm} from 'react-hook-form'
-import res from 'express/lib/response'
 
 
 function Login() {
@@ -58,12 +57,11 @@ function Login() {
                         label="Email: "
                         placeholder="Enter your email"
                         type="email"
-                        {...register("email",{
-                            required:true,
-                            validate:{
-                                matchPattern:(value)=> /^([\w\.\-_]+)?\w+@[\w-_]+(\.\w+){1,}$/.
-                                test(value) || "Email address must be a valid address"
-
+                        {...register("email", {
+                            required: true,
+                            validate: {
+                                matchPatern: (value) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
+                                "Email address must be a valid address",
                             }
                         })}
                     />
@@ -75,10 +73,10 @@ function Login() {
                         required:true,
                     })}
                     />
-                    <button 
+                    <Button 
                     type='submit'
                     className='w-full'
-                    >Sign in</button>
+                    >Sign in</Button>
                 </div>
 
             </form>
