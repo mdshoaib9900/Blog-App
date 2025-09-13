@@ -1,18 +1,19 @@
 import conf from "../conf/conf.js";
-import { Client, Account, ID,Databse,Storage,Query } from "appwrite";
+import { Client, Account, ID,Databases,Storage,Query } from "appwrite";
 
 export class Service{
     client=new Client();
     databases;
     bucket;
     constructor(){
-          this.client
+        this.client
         .setEndpoint(conf.appWriteUrl)
-        .setProject(conf.appwriteProjectId);
+        .setProject(conf.appWriteProjectId);
         this.account=new Account(this.client);
-        this.databases=new Databse(this.client);
-        this.bucket=new Storage(thhis.client);
+        this.databases=new Databases(this.client);
+        this.bucket=new Storage(this.client);
     }
+    
 
     async createPost({title,slug,content,featuredImage,status,userId}){
         try {
@@ -33,6 +34,7 @@ export class Service{
             
         }
     }
+
     async updatePost(slug,{title,content,
         featuredImage,status
     }){
@@ -45,7 +47,7 @@ export class Service{
                     title,
                     content,
                     featuredImage,
-                    status
+                    status,
                 }
             )
         } catch (error) {
@@ -72,7 +74,7 @@ export class Service{
         try {
             return await this.databases.getDocument(
                 conf.appWriteDatabaseId,
-                CSSFontFaceRule.appWriteCollectionId,
+                conf.appWriteCollectionId,
                 slug
             )
         } catch (error) {
@@ -83,7 +85,7 @@ export class Service{
 
     async getAllPost(queries = [Query.equal("status","active")]){
         try {
-            return await this.databases.listDocument(
+            return await this.databases.listDocuments(
                 conf.appWriteDatabaseId,
                 conf.appWriteCollectionId,
                 queries,
@@ -100,7 +102,7 @@ export class Service{
             return await this.bucket.createFile(
                 conf.appWriteBucketId,
                 ID.unique(),
-                file
+                file,
             )
         } catch (error) {
             console.log(error);
@@ -121,8 +123,10 @@ export class Service{
         }
     }
 
-    getFilePreview(fileId){
-        return this.bucket.getFilePreview(
+     getFilePreview(fileId){
+        // console.log("image file id",fileId);
+        
+        return  this.bucket.getFilePreview(
             conf.appWriteBucketId,
             fileId
         )
