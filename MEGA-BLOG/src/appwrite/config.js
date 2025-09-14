@@ -96,6 +96,18 @@ export class Service{
         }
     }
 
+      // 🔹 Get posts of a specific user
+  async getUserPosts (userId) {
+    try {
+      return await this.databases.listDocuments(conf.appWriteDatabaseId,conf.appWriteCollectionId, [
+        Query.equal("userId", userId),
+        Query.orderDesc("$createdAt"),
+      ]);
+    } catch (error) {
+      console.error("Appwrite getUserPosts Error:", error);
+      return false;
+    }
+  }
     //file upload service
     async uploadFile(file){
         try {
@@ -123,10 +135,10 @@ export class Service{
         }
     }
 
-     getFilePreview(fileId){
+     getFileView(fileId){
         // console.log("image file id",fileId);
         
-        return  this.bucket.getFilePreview(
+        return  this.bucket.getFileView(
             conf.appWriteBucketId,
             fileId
         )

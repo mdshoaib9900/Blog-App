@@ -12,6 +12,7 @@ import AuthLayout from  "./AuthLayout.jsx"
 import Button from "./Button.jsx"
 import  Input   from "./Input.jsx"
 import Select from "./Select.jsx"
+import Profile from "../pages/Profile.jsx"
 export{
     Header,
     Footer,
@@ -26,5 +27,6 @@ export{
     AuthLayout,
     Button,
     Input,
+    Profile,
     Select
 }

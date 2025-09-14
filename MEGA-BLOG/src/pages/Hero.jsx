@@ -31,13 +31,13 @@ function Hero() {
           </p>
           <div className="flex justify-center md:justify-start gap-6 flex-wrap">
             <Link
-              to="/all-posts"
+              to="/"
               className="bg-purple-600 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-purple-700 transition"
             >
               Start Reading
             </Link>
             <Link
-              to="/create-post"
+              to="/"
               className="border border-purple-600 text-purple-600 px-8 py-4 rounded-xl text-lg font-semibold hover:bg-purple-600 hover:text-white transition"
             >
               Write a Post

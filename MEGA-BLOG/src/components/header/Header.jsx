@@ -2,15 +2,18 @@ import React, { useState } from "react";
 import { Container, Logo, LogoutBtn } from "../index";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Menu, X } from "lucide-react"; // using lucide-react for icons
+import { Menu, X, User, LogOut } from "lucide-react"; // lucide-react icons
+import Profile from "../../pages/Profile";
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
   const authStatus = useSelector((state) => state.auth.status);
+  const userData = useSelector((state) => state.auth.userData); // assuming you store user info
   const navigate = useNavigate();
 
   const navItems = [
-    { name: "Home", slug: "/", active:true},
+    { name: "Home", slug: "/", active: true },
     { name: "Login", slug: "/login", active: !authStatus },
     { name: "Signup", slug: "/signup", active: !authStatus },
     { name: "My Posts", slug: "/all-posts", active: authStatus },
@@ -22,7 +25,10 @@ function Header() {
       <Container>
         <nav className="flex items-center justify-between py-4">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 font-bold text-2xl text-purple-600">
+          <Link
+            to="/"
+            className="flex items-center gap-2 font-bold text-2xl text-purple-600"
+          >
             <Logo />
           </Link>
 
@@ -30,22 +36,55 @@ function Header() {
           <ul className="hidden md:flex items-center gap-6">
             {navItems.map(
               (item) =>
-                item.active  && (
+                item.active && (
                   <li key={item.name}>
                     <button
                       onClick={() => navigate(item.slug)}
-                      
-                      className="px-4 py-2 rounded-lg font-medium text-gray-700 hover:text-purple-600 hover:bg-purple-50 transition
-                      cursor-pointer"
+                      className="px-4 py-2 rounded-lg font-medium text-gray-700 hover:text-purple-600 hover:bg-purple-50 transition cursor-pointer"
                     >
                       {item.name}
                     </button>
                   </li>
                 )
             )}
+
+            {/* Profile Dropdown */}
             {authStatus && (
-              <li>
-                <LogoutBtn />
+              <li className="relative">
+                <button
+                  onClick={() => setProfileOpen(!profileOpen)}
+                  className="flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-100 hover:bg-purple-200 transition cursor-pointer"
+                >
+                  <span className="font-medium text-purple-700">
+                    {userData?.name || "User"}
+                  </span>
+                  <img
+                    src={`https://ui-avatars.com/api/?name=${userData?.name || "U"}&background=8b5cf6&color=fff`}
+                    alt="avatar"
+                    className="w-8 h-8 rounded-full border border-purple-400"
+                  />
+                </button>
+
+                {profileOpen && (
+                  <div className="absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-lg border p-2 z-50 cursor-pointer">
+                    <button 
+                      onClick={() => {
+                        navigate("/profile");
+                        setProfileOpen(false);
+                      }}
+                      className="flex cursor-pointer items-center gap-2 w-full px-3 py-2 rounded-md hover:bg-purple-50 text-gray-700"
+                    >
+                      <User size={16} /> Profile
+                    </button>
+                    <div className="border-t my-1"></div>
+                    <div
+                      onClick={() => setProfileOpen(false)}
+                      className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-red-50 text-black cursor-pointer"
+                    >
+                      <LogOut size={16} /> <LogoutBtn />
+                    </div>
+                  </div>
+                )}
               </li>
             )}
           </ul>
@@ -79,6 +118,15 @@ function Header() {
             )}
             {authStatus && (
               <div className="pt-2 border-t">
+                <button
+                  onClick={() => {
+                    navigate("/Profile");
+                    setMenuOpen(false);
+                  }}
+                  className="block w-full text-left px-4 py-2 rounded-lg font-medium text-gray-700 hover:text-purple-600 hover:bg-purple-50 transition"
+                >
+                  Profile
+                </button>
                 <LogoutBtn />
               </div>
             )}
