@@ -5,6 +5,7 @@ import authService from './appwrite/auth'
 import {login,logout} from "./store/authslice"
 import { Footer, Header } from './components'
 import { Outlet } from 'react-router-dom'
+import Hero from './pages/Hero'
 
 function App() {
   const [loading,setLoading]=useState(true)

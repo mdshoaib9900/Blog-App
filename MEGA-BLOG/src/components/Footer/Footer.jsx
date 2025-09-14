@@ -12,7 +12,7 @@ function Footer() {
           <div className="w-full md:w-1/3 px-6 mb-8 md:mb-0">
             <Logo width="120px" />
             <p className="mt-4 text-gray-400 text-sm">
-              &copy; 2023 DevUI. All rights reserved.
+              &copy; 2025 INKSPIRATION. All rights reserved.
             </p>
             <div className="flex mt-4 space-x-4">
               <a href="#" className="hover:text-blue-500 transition-colors">

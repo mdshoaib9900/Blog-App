@@ -9,7 +9,7 @@ function Postcard({ $id, title, featuredImage }) {
 
   return (
     <Link to={`/post/${$id}`}>
-      <div className="w-full bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-1">
+      <div className="w-full bg-white border-2 border-black rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-1">
         {/* Image */}
         <div className="relative w-full h-48 overflow-hidden">
           <img
@@ -19,12 +19,14 @@ function Postcard({ $id, title, featuredImage }) {
           />
         </div>
 
-        {/* Title */}
-        <div className="p-4">
-          <h2 className="text-xl font-bold text-gray-800 mb-2">{title}</h2>
-          <p className="text-gray-600 text-sm">
-            {/* Optional: excerpt or snippet */}
-          </p>
+        {/* Title + Button */}
+        <div className="p-4 flex flex-col items-center justify-center ">
+          <h2 className="text-xl font-bold text-gray-800 mb-4 text-center bg-blue-300 p-2 rounded-xl">
+            Title : {title}
+          </h2>
+          <button className="w-3/4 rounded-xl font-bold bg-blue-700 text-white py-2 cursor-pointer hover:bg-blue-600 text-center">
+            Read More
+          </button>
         </div>
       </div>
     </Link>

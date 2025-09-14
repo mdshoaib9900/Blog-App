@@ -3,6 +3,7 @@ import appWriteService from "../appwrite/config"
 import {Container} from '../components'
 import Postcard from '../components/Postcard'
 import { useSelector } from 'react-redux'
+import Hero from './Hero'
 function Home() {
     const [posts,setPosts]=useState([])
     const active=useSelector((state)=> state.auth.status)
@@ -21,6 +22,7 @@ function Home() {
     if(!active){
         return (
             <div className='w-full py-8 mt-4 text-center'>
+
                 <div className='p-2 w-full'>
                     <h1 className='text-2xl
                     font-bold hover:text-gray-500'>
@@ -41,11 +43,24 @@ function Home() {
                     </h1>
                 </div>
             </div>
-                    )
+            )
     }
 
      
   return (
+      <div className="min-h-screen w-full bg-[#fafafa] relative text-gray-900">
+    {/* Diagonal Grid with Light */}
+    <div
+      className="absolute inset-0 z-0 pointer-events-none"
+      style={{
+        backgroundImage: `
+          repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.1) 0, rgba(0, 0, 0, 0.1) 1px, transparent 1px, transparent 20px),
+        repeating-linear-gradient(-45deg, rgba(0, 0, 0, 0.1) 0, rgba(0, 0, 0, 0.1) 1px, transparent 1px, transparent 20px)
+        `,
+        backgroundSize: "40px 40px",
+      }}
+    />
+    {/* Your Content/Components */}
     <div className='w-full py-8'> 
     <Container>
         <div  className='flex flex-wrap'>
@@ -56,6 +71,7 @@ function Home() {
             ))}
         </div>
     </Container>
+    </div>
     </div>
   )
 }
