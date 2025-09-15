@@ -15,7 +15,7 @@ export class Service{
     }
     
 
-    async createPost({title,slug,content,featuredImage,status,userId}){
+    async createPost({title,slug,content,featuredImage,status,userName,userId}){
         try {
             return await this.databases.createDocument(
                 conf.appWriteDatabaseId,
@@ -26,7 +26,8 @@ export class Service{
                     content,
                     featuredImage,
                     status,
-                    userId
+                    userId,
+                    userName,
                 }
             )
         } catch (error) {
@@ -36,7 +37,7 @@ export class Service{
     }
 
     async updatePost(slug,{title,content,
-        featuredImage,status
+        featuredImage,status,name
     }){
         try {
             return await this.databases.updateDocument(
@@ -48,6 +49,7 @@ export class Service{
                     content,
                     featuredImage,
                     status,
+                    name,
                 }
             )
         } catch (error) {

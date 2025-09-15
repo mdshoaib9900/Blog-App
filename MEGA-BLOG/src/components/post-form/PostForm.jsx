@@ -12,6 +12,7 @@ export default function PostForm({ post }) {
       slug: post?.$id || "",
       content: post?.content || "",
       status: post?.status || "active",
+      userName: post?.userName || "", 
     },
   });
 
@@ -31,6 +32,7 @@ export default function PostForm({ post }) {
         content: data.content,
         featuredImage: file ? file.$id : post.featuredImage,
         status: data.status,
+        userName: data.userName,
       });
 
       if (dbPost) {
@@ -50,6 +52,7 @@ export default function PostForm({ post }) {
           featuredImage: fileId,
           status: data.status,
           userId: userData.$id,
+          userName: data.userName,   
         });
 
         if (dbPost) {
@@ -89,14 +92,21 @@ export default function PostForm({ post }) {
 
         <form onSubmit={handleSubmit(submit)} className="flex flex-wrap gap-8">
           {/* Left Side */}
+          
           <div className="w-full md:w-2/3 space-y-6">
+          <Input
+              label="Author Name"
+              placeholder="Enter author name..."
+              className="mb-4"
+              {...register("userName", { required: true })}
+            />
             <Input
               label="Post Title"
               placeholder="Enter your post title..."
               className="mb-4"
               {...register("title", { required: true })}
             />
-
+            
             <Input
               label="Slug"
               placeholder="auto-generated-slug"

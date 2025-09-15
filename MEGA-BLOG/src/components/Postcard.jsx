@@ -1,11 +1,13 @@
 import React from "react";
 import appWriteService from "../appwrite/config";
 import { Link } from "react-router-dom";
+import {useSelector} from "react-redux"
+function Postcard({ $id, title, featuredImage,userName }) {
 
-function Postcard({ $id, title, featuredImage }) {
   const imgUrl = featuredImage
     ? appWriteService.getFileView(featuredImage)
     : "https://via.placeholder.com/300x200?text=No+Image";
+
 
   return (
     <Link to={`/post/${$id}`}>
@@ -21,6 +23,9 @@ function Postcard({ $id, title, featuredImage }) {
 
         {/* Title + Button */}
         <div className="p-4 flex flex-col items-center justify-center">
+           <h3 className="text-sm text-gray-500 mb-2">
+            Posted by <span className="font-medium text-gray-700">{userName || "Unknown User"}</span>
+          </h3>
           <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-800 mb-4 text-center bg-blue-300 px-3 py-2 rounded-lg w-full">
             {title}
           </h2>
