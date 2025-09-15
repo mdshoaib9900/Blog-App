@@ -23,7 +23,7 @@ function Header() {
   return (
     <header className="sticky top-0 z-50 bg-white/70 backdrop-blur-md border-b shadow-sm">
       <Container>
-        <nav className="flex items-center justify-between py-4">
+        <nav className="flex items-center justify-between py-3">
           {/* Logo */}
           <Link
             to="/"
